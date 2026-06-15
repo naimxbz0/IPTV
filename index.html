@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,
+          maximum-scale=1.0,
+          user-scalable=no">
+
+    <title>XBZ Prime TV | Live Football Streaming</title>
+
+    <meta name="description"
+          content="XBZ Prime TV - Live Football Streaming, FIFA World Cup 2026, Live Scores, Sports Channels">
+
+    <meta name="theme-color" content="#0a0e27">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="XBZ Prime TV">
+
+    <meta property="og:title" content="XBZ Prime TV">
+    <meta property="og:description" content="Live Football Streaming Platform">
+    <meta property="og:type" content="website">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- VideoJS -->
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- APP WRAPPER -->
+<!-- ========================= -->
+
+<div class="app-shell">
+
+    <!-- ========================= -->
+    <!-- SIDEBAR OVERLAY -->
+    <!-- ========================= -->
+
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- ========================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================= -->
+
+    <aside id="sidebar" class="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="sidebar-logo">
+                ⚽ XBZ Prime TV
+            </div>
+
+            <button id="closeSidebar"
+                    class="sidebar-close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <button class="category-link active"
+                    data-category="all">
+
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+
+            </button>
+
+            <button class="category-link"
+                    data-category="live">
+
+                <i class="fa-solid fa-broadcast-tower"></i>
+                <span>Live Now</span>
+
+            </button>
+
+            <button class="category-link"
+                    data-category="fifa">
+
+                <i class="fa-solid fa-futbol"></i>
+                <span>FIFA</span>
+
+            </button>
+
+            <button class="category-link"
+                    data-category="bein">
+
+                <i class="fa-solid fa-tv"></i>
+                <span>beIN Sports</span>
+
+            </button>
+
+            <button class="category-link"
+                    data-category="espn">
+
+                <i class="fa-solid fa-trophy"></i>
+                <span>ESPN</span>
+
+            </button>
+
+            <button class="category-link"
+                    data-category="dazn">
+
+                <i class="fa-solid fa-play"></i>
+                <span>DAZN</span>
+
+            </button>
+
+            <button class="category-link"
+                    data-category="sony">
+
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Sony LIV</span>
+
+            </button>
+
+            <button class="category-link"
+                    data-category="fox">
+
+                <i class="fa-solid fa-fire"></i>
+                <span>Fox Sports</span>
+
+            </button>
+
+            <button class="category-link"
+                    data-category="sky">
+
+                <i class="fa-solid fa-cloud"></i>
+                <span>Sky Sports</span>
+
+            </button>
+
+            <button class="category-link"
+                    data-category="other">
+
+                <i class="fa-solid fa-layer-group"></i>
+                <span>Other</span>
+
+            </button>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-stat">
+                Channels Loaded:
+                <span id="sidebarChannelCount">0</span>
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- ========================= -->
+    <!-- HEADER -->
+    <!-- ========================= -->
+
+    <header class="header">
+
+        <div class="header-left">
+
+            <button id="menuBtn"
+                    class="icon-btn">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+            <a href="#"
+               class="logo">
+
+                <span class="logo-ball">⚽</span>
+
+                <span class="logo-text">
+                    XBZPrime
+                </span>
+
+            </a>
+
+        </div>
+
+        <div class="header-center">
+
+            <div class="live-indicator">
+
+                <span class="live-dot"></span>
+
+                <span>LIVE</span>
+
+                <strong id="liveMatchCount">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="header-right">
+
+            <button id="refreshBtn"
+                    class="icon-btn">
+
+                <i class="fa-solid fa-rotate"></i>
+
+            </button>
+
+            <button id="themeToggle"
+                    class="icon-btn">
+
+                <i class="fa-solid fa-moon"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- ========================= -->
+    <!-- CUSTOM STREAM SECTION -->
+    <!-- ========================= -->
+
+    <section class="stream-panel">
+
+        <button id="streamPanelToggle"
+                class="stream-panel-header">
+
+            <div>
+
+                <i class="fa-solid fa-link"></i>
+
+                Custom Stream Input
+
+            </div>
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </button>
+
+        <div id="streamPanelContent"
+             class="stream-panel-content">
+
+            <div class="stream-tabs">
+
+                <button class="stream-tab active"
+                        data-tab="url">
+                    Direct URL
+                </button>
+
+                <button class="stream-tab"
+                        data-tab="m3u">
+                    M3U Playlist
+                </button>
+
+                <button class="stream-tab"
+                        data-tab="embed">
+                    HTML Embed
+                </button>
+
+            </div>
+
+            <!-- URL TAB -->
+
+            <div class="tab-content active"
+                 id="urlTab">
+
+                <input type="text"
+                       id="streamUrlInput"
+                       placeholder="Paste .m3u8 / .mpd / .ts / .mp4 URL">
+
+                <button id="playCustomUrl"
+                        class="primary-btn">
+
+                    <i class="fa-solid fa-play"></i>
+
+                    Play Stream
+
+                </button>
+
+                <p class="helper-text">
+                    Example:
+                    https://example.com/live.m3u8
+                </p>
+
+            </div>
+
+            <!-- M3U TAB -->
+
+            <div class="tab-content"
+                 id="m3uTab">
+
+                <textarea
+                        id="m3uContentInput"
+                        rows="6"
+                        placeholder="#EXTM3U"></textarea>
+
+                <input type="text"
+                       id="m3uUrlInput"
+                       placeholder="Paste M3U URL">
+
+                <button id="loadM3UButton"
+                        class="primary-btn">
+
+                    <i class="fa-solid fa-upload"></i>
+
+                    Load Playlist
+
+                </button>
+
+                <div id="parsedM3UChannels"
+                     class="parsed-channels-list">
+
+                </div>
+
+            </div>
+
+            <!-- EMBED TAB -->
+
+            <div class="tab-content"
+                 id="embedTab">
+
+                <textarea
+                        id="embedCodeInput"
+                        rows="6"
+                        placeholder="<iframe ...>"></textarea>
+
+                <button id="loadEmbedButton"
+                        class="primary-btn">
+
+                    <i class="fa-solid fa-code"></i>
+
+                    Load Embed
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- HERO PLAYER SECTION -->
+    <!-- ========================= -->
+
+    <section class="hero-player">
+
+        <div class="player-card">
+
+            <!-- Loading Overlay -->
+
+            <div id="loadingOverlay"
+                 class="loading-overlay hidden">
+
+                <div class="spinner"></div>
+
+                <p>
+                    Connecting to stream...
+                </p>
+
+            </div>
+
+            <!-- Error Overlay -->
+
+            <div id="errorOverlay"
+                 class="error-overlay hidden">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <h3>
+                    Stream Error
+                </h3>
+
+                <p id="errorMessage">
+                    Unable to load stream.
+                </p>
+
+                <div class="retry-progress">
+
+                    <div id="retryBar"></div>
+
+                </div>
+
+                <div class="error-actions">
+
+                    <button id="retryBtn"
+                            class="primary-btn">
+
+                        Retry
+
+                    </button>
+
+                    <button id="nextSourceBtn"
+                            class="secondary-btn">
+
+                        Next Source
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Watermark -->
+
+            <div class="player-watermark">
+
+                XBZ LIVE TV
+
+            </div>
+
+            <!-- Placeholder -->
+
+            <div id="playerPlaceholder"
+                 class="player-placeholder">
+
+                <div class="football-animation">
+                    ⚽
+                </div>
+
+                <h1>
+                    XBZ Prime TV
+                </h1>
+
+                <p>
+                    Live Football Streaming Platform
+                </p>
+
+                <div id="quickChannels"
+                     class="quick-channels">
+
+                </div>
+
+            </div>
+
+            <!-- Video Container -->
+
+            <div id="videoContainer"
+                 class="video-container hidden">
+
+                <video
+                        id="videoPlayer"
+                        class="video-js vjs-default-skin"
+                        controls
+                        preload="auto">
+
+                </video>
+
+            </div>
+
+            <!-- Embed Container -->
+
+            <div id="embedContainer"
+                 class="embed-container hidden">
+
+            </div>
+
+        </div>
+
+        <!-- Player Info -->
+
+        <div class="player-info-bar">
+
+            <div class="player-info-left">
+
+                <h3 id="currentChannelName">
+                    No Channel Selected
+                </h3>
+
+                <div class="stream-meta">
+
+                    <span id="qualityBadge"
+                          class="quality-badge">
+                        --
+                    </span>
+
+                    <span id="bitrateInfo">
+                        --
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="player-actions">
+
+                <button id="sourceBtn"
+                        class="icon-btn">
+                    <i class="fa-solid fa-layer-group"></i>
+                </button>
+
+                <button id="pipBtn"
+                        class="icon-btn">
+                    <i class="fa-solid fa-clone"></i>
+                </button>
+
+                <button id="stopBtn"
+                        class="icon-btn danger">
+                    <i class="fa-solid fa-stop"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+  
+      <!-- ========================= -->
+    <!-- LIVE SCORE TICKER -->
+    <!-- ========================= -->
+
+    <section class="ticker-section">
+
+        <div class="ticker-fade-left"></div>
+
+        <div class="ticker-wrapper">
+
+            <div id="liveTicker"
+                 class="ticker-track">
+
+                <div class="ticker-loading">
+                    Loading live matches...
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="ticker-fade-right"></div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ========================= -->
+
+    <main class="main-layout">
+
+        <!-- LEFT CONTENT -->
+
+        <section class="matches-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        ⚽ Live Football Matches
+                    </h2>
+
+                    <div class="auto-update">
+
+                        <span class="update-dot"></span>
+
+                        Auto Updating
+
+                    </div>
+
+                </div>
+
+                <div class="match-tabs">
+
+                    <button class="match-tab active"
+                            data-match-tab="live">
+
+                        Live
+
+                        <span id="liveCountBadge"
+                              class="badge">
+                            0
+                        </span>
+
+                    </button>
+
+                    <button class="match-tab"
+                            data-match-tab="upcoming">
+
+                        Upcoming
+
+                    </button>
+
+                    <button class="match-tab"
+                            data-match-tab="finished">
+
+                        Finished
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- MATCHES GRID -->
+
+            <div id="matchesGrid"
+                 class="matches-grid">
+
+                <!-- Skeleton Loader -->
+
+                <div class="match-skeleton"></div>
+                <div class="match-skeleton"></div>
+                <div class="match-skeleton"></div>
+                <div class="match-skeleton"></div>
+                <div class="match-skeleton"></div>
+                <div class="match-skeleton"></div>
+
+            </div>
+
+        </section>
+
+        <!-- RIGHT SIDEBAR CHANNELS -->
+
+        <aside class="channels-sidebar">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        📺 Channels
+                    </h2>
+
+                    <p class="small-text">
+
+                        Auto Updated Playlist
+
+                    </p>
+
+                </div>
+
+                <div class="loaded-status">
+
+                    <span class="update-dot"></span>
+
+                    Loaded
+
+                </div>
+
+            </div>
+
+            <div id="channelsGrid"
+                 class="channels-grid">
+
+            </div>
+
+        </aside>
+
+    </main>
+
+    <!-- ========================= -->
+    <!-- SOURCE MODAL -->
+    <!-- ========================= -->
+
+    <div id="sourceModal"
+         class="modal">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h3>
+                    Available Sources
+                </h3>
+
+                <button id="closeSourceModal"
+                        class="icon-btn">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+            <div id="sourceList"
+                 class="source-list">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- TOAST CONTAINER -->
+    <!-- ========================= -->
+
+    <div id="toastContainer"
+         class="toast-container">
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- MOBILE BOTTOM NAV -->
+    <!-- ========================= -->
+
+    <nav class="mobile-nav">
+
+        <button class="mobile-nav-item active">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span>Home</span>
+
+        </button>
+
+        <button class="mobile-nav-item"
+                id="mobilePlayBtn">
+
+            <i class="fa-solid fa-link"></i>
+
+            <span>Play URL</span>
+
+        </button>
+
+        <button class="mobile-nav-item"
+                id="mobileLiveBtn">
+
+            <i class="fa-solid fa-broadcast-tower"></i>
+
+            <span>Live</span>
+
+        </button>
+
+        <button class="mobile-nav-item"
+                id="mobileScoresBtn">
+
+            <i class="fa-solid fa-futbol"></i>
+
+            <span>Scores</span>
+
+        </button>
+
+        <button class="mobile-nav-item"
+                id="mobileMenuBtn">
+
+            <i class="fa-solid fa-bars"></i>
+
+            <span>Menu</span>
+
+        </button>
+
+    </nav>
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <footer class="footer">
+
+        <div class="footer-brand">
+
+            <h3>
+                ⚽ XBZ Prime TV
+            </h3>
+
+            <p>
+                Ultimate Live Football Streaming Experience
+            </p>
+
+        </div>
+
+        <div class="footer-links">
+
+            <a href="#">
+                Telegram
+            </a>
+
+            <a href="#">
+                GitHub
+            </a>
+
+            <a href="#">
+                Contact
+            </a>
+
+        </div>
+
+        <div class="footer-copy">
+
+            ©2026 XBZ Prime TV All Rights Reserved
+
+            <br>
+
+            Made with ❤️ by Naim Xbz
+
+        </div>
+
+        <div class="footer-disclaimer">
+
+            This site provides links to third-party streams.
+            We do not host any content.
+
+        </div>
+
+    </footer>
+
+</div>
+
+<!-- ========================= -->
+<!-- HLS.JS -->
+<!-- ========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<!-- ========================= -->
+<!-- VIDEO.JS -->
+<!-- ========================= -->
+
+<script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+
+<!-- ========================= -->
+<!-- MAIN SCRIPT -->
+<!-- ========================= -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
